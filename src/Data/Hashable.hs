@@ -16,7 +16,7 @@
 module Data.Hashable (Hashable, hash) where
 
 import Data.Bits
-import Char (ord)
+import Data.Char (ord)
 
 class Hashable a where
     hash :: a -> Int

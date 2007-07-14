@@ -34,7 +34,7 @@ module Data.THash.THT (
 ) where 
 
 import Prelude
-    ( Show(..), Ord(..), Eq, Bool(..), Maybe(..),
+    ( Show(..), Ord(..), Eq, Bool(..), Maybe(..)
     , Num, Int
     , (*), (+), (-), ($), (==), (++), (.), (/=)
     , mapM_, sequence_, sequence, return, mod, fst, snd, id

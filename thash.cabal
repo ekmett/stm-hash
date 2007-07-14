@@ -1,7 +1,8 @@
 name:			thash
-version:		0.1
+version:		0.2
 license:		BSD3
 license-file:		LICENSE
+build-depends:		base -any, stm -any
 author:			Edward Kmett
 maintainer:		ekmett@gmail.com
 stability:		alpha
@@ -14,5 +15,5 @@ exposed-modules:
 	Data.Hashable,
 	Data.THash,
 	Data.THash.THT
-ghc-options:		-Wall -O -funbox-strict-fields
+ghc-options:		-O2 -funbox-strict-fields
 hs-source-dirs:		src
