@@ -1,5 +1,5 @@
 name:			thash
-version:		0.2
+version:		0.3
 license:		BSD3
 license-file:		LICENSE
 build-depends:		base -any, stm -any

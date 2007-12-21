@@ -30,6 +30,7 @@ module Data.THash (
     keys,    -- THash k v ->                                STM [k]
     values,  -- THash k v ->                                STM [v]
     hashInt, -- Int -> Int
+    get,
     -- hashString -- Int -> Int
 ) where 
 
@@ -88,32 +89,32 @@ insert hash key value = do x <- get hash; y <- THT.insert x key value; setif has
 
 {-# INLINE update #-}
 -- | Insert a value into the hash table, replacing any value with the same key that is present.
-update :: Eq k => THash k v -> k -> v ->               STM ()
+update :: Eq k => THash k v -> k -> v -> STM ()
 update hash key value = do x <- get hash; y <- THT.update x key value; set hash y
 
 {-# INLINE modify #-}
 -- | Update a value in the hash table using the supplied function. 
-modify :: Eq k => THash k v -> k -> (Maybe v -> v) ->  STM ()
+modify :: Eq k => THash k v -> k -> (Maybe v -> v) -> STM ()
 modify hash key f = do x <- get hash; y <- THT.modify x key f ; set hash y
 
 {-# INLINE delete #-}
 -- | Remove a value from the hash table. Returns 'True' to indicate success.
-delete :: Eq k => THash k v -> k ->                    STM (Bool)
+delete :: Eq k => THash k v -> k -> STM (Bool)
 delete hash key = do x <- get hash; y <- THT.delete x key; setif hash y
 
 {-# INLINE lookup #-}
 -- | Lookup a value in the hash table. 
-lookup :: Eq k => THash k v -> k ->                    STM (Maybe v)
+lookup :: Eq k => THash k v -> k -> STM (Maybe v)
 lookup hash key = do x <- get hash; THT.lookup x key
 
 {-# INLINE mapH #-}
 -- | Map a function over all @(key,value)@ functions in the hash table.
-mapH   :: ((k,v) -> r) -> THash k v ->                 STM [r]
+mapH :: ((k,v) -> r) -> THash k v -> STM [r]
 mapH f hash = do x <- get hash; THT.mapH f x 
 
 {-# INLINE each #-}
 -- | @each = mapH id@ and returns all @(key,value)@ pairs in the hash.
-each   :: THash k v -> STM [(k,v)]
+each :: THash k v -> STM [(k,v)]
 each = mapH id
 
 {-# INLINE keys #-}
